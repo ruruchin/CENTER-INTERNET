@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ReactLenis } from 'lenis/react';
 import Navigation from '../components/Navigation';
 import CreativeFooter from '../components/CreativeFooter';
 import { validateJoinUsForm, validateHoneypot, sanitize, getCharCount, checkRateLimit, recordSubmission, LIMITS } from '../utils/formValidation';
 import { sendJoinUsForm, isConfigured } from '../utils/emailService';
+import PrivacyModal from '../components/PrivacyModal';
 import '../styles/JoinUs.css';
 export default function JoinUs() {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -176,12 +178,16 @@ export default function JoinUs() {
                   <button type="submit" className="join-submit-button" disabled={status === 'submitting'}>
                     {status === 'submitting' ? (<span className="join-btn-loading"><span className="join-spinner"></span>Отправка...</span>) : status === 'error' ? 'Попробовать снова' : 'Отправить анкету'}
                   </button>
+                  <p className="join-privacy-notice">
+                    Нажимая кнопку, вы соглашаетесь с <span className="privacy-link" onClick={() => setIsPrivacyOpen(true)}>условиями обработки персональных данных</span>
+                  </p>
                 </div>
               </form>
             )}
           </section>
         </article>
         <CreativeFooter />
+        <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
       </main>
     </ReactLenis>
   );

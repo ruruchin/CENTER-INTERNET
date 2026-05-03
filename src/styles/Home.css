@@ -852,3 +852,47 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 30%, transparent 70%, rgba(0, 0, 0, 0.8));
   pointer-events: none;
 }
+
+/* Hero CTA Button */
+.home-hero-cta {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.hero-cta-button {
+  width: 100%;
+  padding: 1.25rem 0;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .hero-cta-button {
+    padding: 1.75rem 0;
+    font-size: 1rem;
+  }
+  .home-hero-cta {
+    margin-top: 4rem;
+  }
+}
+
+.hero-cta-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+.hero-cta-button:active {
+  transform: translateY(0) scale(0.98);
+}

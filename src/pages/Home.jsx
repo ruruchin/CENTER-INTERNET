@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, Suspense, lazy } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ReactLenis, useLenis } from 'lenis/react';
@@ -79,16 +79,25 @@ function ClientRibbon() {
   );
 }
 function HeroSection() {
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(".hero-star",
         { rotate: -90, scale: 0, opacity: 0 },
-        { rotate: 0, scale: 1, opacity: 1, duration: 2, ease: "power4.out" }
+        { rotate: 0, scale: 1, opacity: 1, duration: 2, ease: "power4.out", force3D: true }
       );
       gsap.fromTo(".hero-title-line",
         { y: "150%" },
-        { y: "0%", duration: 1.5, stagger: 0.1, ease: "power4.out", delay: 0.5 }
+        { y: "0%", duration: 1.5, stagger: 0.1, ease: "power4.out", delay: 0.5, force3D: true }
+      );
+      gsap.fromTo(".home-hero-paragraph",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 0.8, duration: 1.2, ease: "power3.out", delay: 0.8, force3D: true }
+      );
+      gsap.fromTo(".hero-cta-button",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 1.2, force3D: true }
       );
     }, containerRef);
     return () => ctx.revert();
@@ -120,6 +129,17 @@ function HeroSection() {
             <div className="home-hero-line-overflow-2"><span className="hero-title-line">DIGITAL ПРОДУКТОВ</span></div>
           </h1>
         </div>
+      </div>
+      <div className="home-hero-cta">
+        <button 
+          className="hero-cta-button reveal-up"
+          onClick={() => {
+            navigate('/contact');
+            window.scrollTo(0, 0);
+          }}
+        >
+          Заказать разработку
+        </button>
       </div>
     </header>
   );

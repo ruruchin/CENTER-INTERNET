@@ -56,11 +56,12 @@ export default function AtelierSection() {
       tl.to(scrollWrapperRef.current, {
         x: () => -(scrollWrapperRef.current.scrollWidth - window.innerWidth),
         ease: "none",
-        duration: 1
+        duration: 1,
+        force3D: true
       }, 0);
       tl.fromTo(progressBarRef.current,
         { scaleX: 0 },
-        { scaleX: 1, ease: "none", duration: 1, transformOrigin: "left center" },
+        { scaleX: 1, ease: "none", duration: 1, transformOrigin: "left center", force3D: true },
         0
       );
       tl.to({}, { duration: 0.1 });

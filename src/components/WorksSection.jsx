@@ -44,14 +44,14 @@ export default function WorksSection() {
     
     const ctx = gsap.context(() => {
       gsap.fromTo(".meta-row", 
-        { opacity: 0, x: -15, filter: "blur(8px)" },
+        { opacity: 0, x: -15 },
         { 
           opacity: 1, 
           x: 0, 
-          filter: "blur(0px)", 
           stagger: 0.06, 
           duration: 0.8, 
-          ease: "power3.out" 
+          ease: "power3.out",
+          force3D: true
         }
       );
       gsap.fromTo(".tech-pill", 
@@ -62,7 +62,8 @@ export default function WorksSection() {
           scale: 1, 
           stagger: 0.03, 
           duration: 0.6, 
-          ease: "back.out(1.4)" 
+          ease: "back.out(1.4)",
+          force3D: true
         }
       );
     }, desktopContainerRef);

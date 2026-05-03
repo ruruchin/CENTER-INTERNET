@@ -31,7 +31,8 @@ export default function Navigation() {
         x: "0%",
         duration: 0.8,
         stagger: 0.05,
-        ease: "power4.inOut"
+        ease: "power4.inOut",
+        force3D: true
       });
       tl.fromTo(links, 
         { y: -100, opacity: 0 },
@@ -40,7 +41,8 @@ export default function Navigation() {
           opacity: 1, 
           duration: 0.8, 
           stagger: 0.04, 
-          ease: "back.out(1.5)" 
+          ease: "back.out(1.5)",
+          force3D: true
         },
         "-=0.4"
       );
@@ -69,7 +71,8 @@ export default function Navigation() {
             each: 0.03,
             from: "random"
           },
-          ease: "power4.inOut"
+          ease: "power4.inOut",
+          force3D: true
         }, "-=0.2");
       }
     }

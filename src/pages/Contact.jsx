@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ReactLenis } from 'lenis/react';
 import Navigation from '../components/Navigation';
@@ -7,8 +7,10 @@ import CreativeFooter from '../components/CreativeFooter';
 import PointCube from '../components/PointCube';
 import { validateContactForm, validateHoneypot, sanitize, getCharCount, checkRateLimit, recordSubmission, LIMITS } from '../utils/formValidation';
 import { sendContactForm, isConfigured } from '../utils/emailService';
+import PrivacyModal from '../components/PrivacyModal';
 import '../styles/Contact.css';
 export default function Contact() {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -158,12 +160,16 @@ export default function Contact() {
                   <button type="submit" className="contact-submit-button" disabled={status === 'submitting'}>
                     {status === 'submitting' ? (<span className="contact-btn-loading"><span className="contact-spinner"></span>Отправка...</span>) : status === 'error' ? 'Попробовать снова' : 'Отправить заявку'}
                   </button>
+                  <p className="contact-privacy-notice">
+                    Нажимая кнопку, вы соглашаетесь с <span className="privacy-link" onClick={() => setIsPrivacyOpen(true)}>условиями обработки персональных данных</span>
+                  </p>
                 </div>
               </form>
             )}
           </section>
         </article>
         <CreativeFooter />
+        <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
       </main>
     </ReactLenis>
   );
