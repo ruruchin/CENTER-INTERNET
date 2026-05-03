@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+:root {
+  --color-dark: #111111;
+  --color-light: #f7f7f7;
+  --color-accent: #00cec9;
+  --color-deep: #07090b;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: serif;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --bg-color: var(--color-light);
+  --text-color: var(--color-dark);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.min-h-screen {
+  min-height: 100vh;
+  min-height: 100lvh;
+}
+.h-screen {
+  height: 100vh;
+  height: 100lvh;
+}

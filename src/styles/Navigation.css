@@ -1,0 +1,111 @@
+.navigation-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  mix-blend-mode: difference;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  .navigation-nav {
+    padding: 2rem;
+  }
+}
+.navigation-logo {
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.navigation-logo-img {
+  height: 1.5rem;
+  width: auto;
+  display: block;
+}
+.navigation-logo:hover {
+  opacity: 0.5;
+}
+.navigation-toggle {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: opacity 150ms ease;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.navigation-toggle:hover {
+  opacity: 0.5;
+}
+.navigation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background: transparent;
+}
+.navigation-overlay.is-open {
+  pointer-events: auto;
+}
+.navigation-shutters-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+  pointer-events: none;
+}
+.navigation-shutter {
+  flex: 1;
+  width: 100%;
+  background-color: #0b0b0b;
+  transform: translateX(-100%); 
+}
+.navigation-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+.navigation-link-wrapper {
+  overflow: hidden;
+}
+.navigation-link {
+  display: block;
+  font-size: 3.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: color 0.3s ease;
+}
+.navigation-link:hover {
+  color: #9ca3af;
+}
+@media (min-width: 768px) {
+  .navigation-link {
+    font-size: 7.5rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+}
