@@ -96,8 +96,8 @@ function HeroSection() {
   return (
     <header ref={containerRef} className="home-hero-section">
       <div className="home-hero-bg">
-          <div className="home-hero-spline-container">
-          </div>
+        <div className="home-hero-spline-container">
+        </div>
         <div className="home-hero-vignette"></div>
       </div>
       <div className="home-hero-star-wrapper">
@@ -127,44 +127,89 @@ function HeroSection() {
 function StickyVideoSection() {
   const sectionRef = useRef(null);
   const videoWrapperRef = useRef(null);
-  const videoRef = useRef(null); 
+  const videoRef = useRef(null);
   const textRef = useRef(null);
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       video.play().catch(err => console.log("Autoplay prevented:", err));
     }
-    
+
     let mm = gsap.matchMedia();
-    
+
     mm.add("(min-width: 769px)", () => {
       const ctx = gsap.context(() => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=150%", 
+            end: "+=150%",
             pin: true,
-            pinSpacing: true, 
+            pinSpacing: true,
             scrub: true,
+            invalidateOnRefresh: true,
           }
         });
-        tl.to(videoWrapperRef.current, { width: "100%", height: "100%", borderRadius: "0px", ease: "none", duration: 0.6 }, 0);
-        tl.to(textRef.current, { opacity: 0, y: -50, ease: "power2.out", duration: 0.3 }, 0);
+
+        // Use scale for smoother expansion instead of width/height where possible
+        // but since we need to change borderRadius and aspect ratio, we stick to optimized dimensions
+        tl.to(videoWrapperRef.current, {
+          width: "100%",
+          height: "100%",
+          borderRadius: "0px",
+          ease: "none",
+          duration: 0.6,
+          force3D: true
+        }, 0);
+
+        tl.to(videoRef.current, { scale: 1.1, ease: "none", duration: 0.6, force3D: true }, 0);
+
+        // Remove blur - it's a performance killer
+        tl.to(textRef.current, {
+          opacity: 0.02,
+          scale: 1.05,
+          ease: "none",
+          duration: 0.6
+        }, 0);
+
+        tl.to(".home-video-floating-labels", { opacity: 0, scale: 1.1, ease: "none", duration: 0.4 }, 0);
+        tl.to(".floating-label.top-left", { x: -50, y: -50, duration: 0.6 }, 0);
+        tl.to(".floating-label.top-right", { x: 50, y: -50, duration: 0.6 }, 0);
+        tl.to(".floating-label.bottom-left", { x: -50, y: 50, duration: 0.6 }, 0);
+        tl.to(".floating-label.bottom-right", { x: 50, y: 50, duration: 0.6 }, 0);
+
+        tl.fromTo(".video-scanner-line",
+          { top: "-10%", opacity: 0 },
+          { top: "110%", opacity: 0.8, duration: 0.4, ease: "none" },
+          0.1
+        );
+
         tl.to({}, { duration: 0.4 });
       }, sectionRef);
       return () => ctx.revert();
     });
-    
+
     return () => mm.revert();
   }, []);
   return (
     <section ref={sectionRef} className="home-video-section">
-      <div ref={textRef} className="home-video-text">
+      <div ref={textRef} className="home-video-background-text">
+        <div className="bg-text-massive reveal-up">CENTER</div>
+        <div className="bg-text-massive reveal-up delay-1">INTELLIGENCE</div>
       </div>
+
+      <div className="home-video-floating-labels">
+        <div className="floating-label top-left reveal-up">2026 Tech</div>
+        <div className="floating-label top-right reveal-up">Digital Sport</div>
+        <div className="floating-label bottom-left reveal-up">CENTER INTELLIGENCE</div>
+        <div className="floating-label bottom-right reveal-up">Be better</div>
+      </div>
+
       <div ref={videoWrapperRef} className="home-video-wrapper">
+        <div className="video-inner-overlay"></div>
+        <div className="video-scanner-line"></div>
         <video
-          ref={videoRef} 
+          ref={videoRef}
           autoPlay
           loop
           muted
