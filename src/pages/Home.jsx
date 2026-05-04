@@ -106,6 +106,7 @@ function HeroSection() {
     <header ref={containerRef} className="home-hero-section">
       <div className="home-hero-bg">
         <div className="home-hero-spline-container">
+          <Spline scene="https://prod.spline.design/UOuZM1d4Y8oJVawm/scene.splinecode" />
         </div>
         <div className="home-hero-vignette"></div>
       </div>

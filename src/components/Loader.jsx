@@ -28,14 +28,36 @@ export default function Loader() {
     });
     const tlLogo = gsap.timeline({ repeat: -1 });
     tlLogo
-      .to(circleRef.current, { y: -40, scale: 0.5, rotation: 180, duration: 0.8, ease: 'back.in(1.5)' }, 0)
-      .to(n1Ref.current, { x: -40, y: 30, scale: 0.5, rotation: -90, duration: 0.8, ease: 'back.in(1.5)' }, 0.1)
-      .to(n2Ref.current, { x: 40, y: 30, scale: 0.5, rotation: 90, duration: 0.8, ease: 'back.in(1.5)' }, 0.2)
-      .to({}, { duration: 0.2 })
-      .to(circleRef.current, { y: 0, scale: 1, rotation: 360, duration: 1.2, ease: 'elastic.out(1, 0.4)' }, 1.2)
-      .to(n1Ref.current, { x: 0, y: 0, scale: 1, rotation: 0, duration: 1.2, ease: 'elastic.out(1, 0.4)' }, 1.3)
-      .to(n2Ref.current, { x: 0, y: 0, scale: 1, rotation: 0, duration: 1.2, ease: 'elastic.out(1, 0.4)' }, 1.4)
-      .to({}, { duration: 0.5 });
+      .to(circleRef.current, { 
+        y: -15, 
+        scale: 1.15, 
+        duration: 1.2, 
+        ease: "power2.inOut" 
+      }, 0)
+      .to([n1Ref.current, n2Ref.current], { 
+        y: 15, 
+        scale: 0.85, 
+        duration: 1.2, 
+        ease: "power2.inOut" 
+      }, 0.1)
+      .to(svgRef.current, { 
+        rotation: 360, 
+        duration: 1.8, 
+        ease: "expo.inOut" 
+      }, 1)
+      .to(circleRef.current, { 
+        y: 0, 
+        scale: 1, 
+        duration: 1.5, 
+        ease: "elastic.out(1, 0.4)" 
+      }, 2.5)
+      .to([n1Ref.current, n2Ref.current], { 
+        y: 0, 
+        scale: 1, 
+        duration: 1.5, 
+        ease: "elastic.out(1, 0.4)" 
+      }, 2.6)
+      .to({}, { duration: 0.8 });
     const updateProgress = () => {
       setProgressVal(Math.round(progressObj.current.value));
       gsap.set(barRef.current, { width: `${progressObj.current.value}%` });
