@@ -49,7 +49,7 @@ function validateEmail(value) {
     return `Email слишком длинный (максимум ${LIMITS.email.max} символов)`;
   if (!EMAIL_REGEX.test(clean))
     return 'Неверный формат email (пример: name@domain.com)';
-  // Additional domain validation
+
   const domain = clean.split('@')[1];
   if (domain) {
     const parts = domain.split('.');
@@ -101,7 +101,7 @@ function validateResume(file) {
     return `Файл слишком большой (максимум ${LIMITS.resume.maxSizeMB} МБ)`;
   return null;
 }
-// ─── Form-level validators ──────────────────────────────────────
+
 export function validateContactForm(data) {
   const errors = {};
   const nameErr = validateName(data.name, 'Имя / Компания');
@@ -128,7 +128,7 @@ export function validateJoinUsForm(data) {
   if (resumeErr) errors.resume = resumeErr;
   return errors;
 }
-// ─── Rate Limiting (persistent, localStorage-based) ─────────────
+
 const SUBMIT_COOLDOWN_MS   = 60_000;
 const MAX_SUBMITS_PER_HOUR = 5;
 const HOUR_MS              = 3_600_000;
@@ -169,11 +169,11 @@ export function recordSubmission(formId) {
   log[formId] = history;
   saveSubmissionLog(log);
 }
-// ─── Honeypot (invisible bot trap) ──────────────────────────────
+
 export function validateHoneypot(value) {
   return !value || value.trim().length === 0;
 }
-// ─── Character counter helper ───────────────────────────────────
+
 export function getCharCount(value, fieldName) {
   const max = LIMITS[fieldName]?.max ?? Infinity;
   const current = (value || '').length;
